@@ -66,8 +66,8 @@ function generateUpperCase(){              //A,Z
 }
 
 function generateSymbol(){
-  const random=getRndInteger(0,symbols.length);
-  return symbols.charAt(randNum);
+  const randNum=getRndInteger(0,symbols.length);
+  return symbol.charAt(randNum);
 }
 
 function calStrength(){
@@ -78,7 +78,7 @@ function calStrength(){
 
   if(uppercaseCheck.checked) hasUpper=true;
   if(lowercaseCheck.checked) hasLower=true;
-  if(numbersChecked) hasNum=true;
+  if(numbersChecked.checked) hasNum=true;
   if(symbolsCheck.Checked) hasSym=true;
 
   if(hasUpper && hasLower (hasNum || hasSym ) && passwordLength>=8){
@@ -111,12 +111,12 @@ function calStrength(){
   },2000);
  }
 
-function shufflePassword(shufflePassword){
+function shufflePassword(array){
   // Fisher Yates Method
 for(let i=array.length-1;i>0;i--){
   const j=Math.floor(Math.random()*(i+1));
   const temp=array[i];
-  arry[i]=array[j];
+  array[i]=array[j];
   array[j]=temp;
 }
 let str=" ";
@@ -157,7 +157,7 @@ return str;
  }) 
 
  generateBtn.addEventListener('click',()=>{
-  // none of the checkbox are Selected
+  // none of the checkbox are Selected              //1//
   if(checkCount==0) return;
 
   if(passwordLength<checkCount){
@@ -167,7 +167,7 @@ return str;
 
   // let's start the journey to find new password
 console.log("Starting the journey");
-// remove old password
+// remove old password                             //2//
 password =" ";
 
 //let's put the stuff mentioned by checkboxes
@@ -213,6 +213,7 @@ console.log("Compulsory addition done");
 //remaining addition
 for(let i=0;i<passwordLength-funcArr.length;i++ ){
   let randIndex=getRndInteger(0,funcArr.length);
+  console.log("randIndex "+randIndex);
   password+=funcArr[randIndex]();
 }
 console.log("Remaining addition done");
@@ -223,7 +224,7 @@ password=shufflePassword(Array.from(password));
 passwordDisplay.value=password;
 console.log("UI addition done");
 // claculate strength
-calcStrength();
+// calStrength();
 
 
 
