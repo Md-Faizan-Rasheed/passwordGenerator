@@ -31,21 +31,27 @@ let passwordLength=10;
 let checkCount=0;
 handleSlider();
 // set strength circle color to grey
+setIndicator("#ccc");
+
 
 // set passwordLength
 function handleSlider(){
   inputSlider.value=passwordLength;
   lengthDisplay.innerText=passwordLength;
+  
+  const min=inputSlider.min;
+  const max=inputSlider.max;
+  inputSlider.style.backgroundSize=((passwordLength-min)*100/(max-min))+"% 100%"
+
 }
 // set strength circle color to gray
-
 
 
 // set Indicator
 function setIndicator(color){
     indicator.style.backgroundColor=color;
     // shadow
-
+    indicator.style.boxShadow=`0px 0px 12px 1px ${color}`;
 }
 function getRndInteger(min,max){
   return  Math.floor( Math. random()*(max-min))+min;
@@ -70,7 +76,7 @@ function generateSymbol(){
   return symbol.charAt(randNum);
 }
 
-function calStrength(){
+function calcStrength(){
   let hasUpper=false;
   let hasLower=false;
   let hasNum=false;
@@ -78,10 +84,10 @@ function calStrength(){
 
   if(uppercaseCheck.checked) hasUpper=true;
   if(lowercaseCheck.checked) hasLower=true;
-  if(numbersChecked.checked) hasNum=true;
-  if(symbolsCheck.Checked) hasSym=true;
+  if(numbersCheck.checked) hasNum=true;
+  if(symbolsCheck.checked) hasSym=true;
 
-  if(hasUpper && hasLower (hasNum || hasSym ) && passwordLength>=8){
+  if(hasUpper && hasLower &&(hasNum || hasSym ) && passwordLength>=8){
     setIndicator("#0f0");
   }else if(
     (hasLower || hasUpper)&&
@@ -224,7 +230,7 @@ password=shufflePassword(Array.from(password));
 passwordDisplay.value=password;
 console.log("UI addition done");
 // claculate strength
-// calStrength();
+calcStrength();
 
 
 
